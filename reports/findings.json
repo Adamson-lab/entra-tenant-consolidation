@@ -1,0 +1,507 @@
+[
+ {
+  "id": "APP-001",
+  "severity": "critical",
+  "category": "Applications",
+  "subject": "AML Case Management",
+  "detail": "Single-tenant SAML app, tier1, 68 assigned users. Uses tenant-specific claims or IDs, so tokens will change.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 68,
+  "refs": [
+   "b366c782-7921-2b26-0c8d-26ccf9aae3d9"
+  ]
+ },
+ {
+  "id": "APP-001",
+  "severity": "critical",
+  "category": "Applications",
+  "subject": "Cards Processing API",
+  "detail": "Single-tenant API app, tier1, 235 assigned users. Uses tenant-specific claims or IDs, so tokens will change.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 235,
+  "refs": [
+   "00c0eafe-90f2-e102-bf73-64f0b3027852"
+  ]
+ },
+ {
+  "id": "APP-001",
+  "severity": "critical",
+  "category": "Applications",
+  "subject": "Core Banking Gateway",
+  "detail": "Single-tenant SAML app, tier1, 316 assigned users. Uses tenant-specific claims or IDs, so tokens will change.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 316,
+  "refs": [
+   "52536547-2315-bd49-abe0-929f9c69382f"
+  ]
+ },
+ {
+  "id": "APP-001",
+  "severity": "critical",
+  "category": "Applications",
+  "subject": "Regulatory Reporting Portal",
+  "detail": "Single-tenant OIDC app, tier1, 104 assigned users. Uses tenant-specific claims or IDs, so tokens will change.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 104,
+  "refs": [
+   "337aa2bf-3741-4068-e782-2d2306c2adee"
+  ]
+ },
+ {
+  "id": "APP-001",
+  "severity": "critical",
+  "category": "Applications",
+  "subject": "SWIFT Alliance Access SSO",
+  "detail": "Single-tenant SAML app, tier1, 126 assigned users. Uses tenant-specific claims or IDs, so tokens will change.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 126,
+  "refs": [
+   "3d45680a-03d7-36f8-e141-67d501bc6600"
+  ]
+ },
+ {
+  "id": "APP-001",
+  "severity": "critical",
+  "category": "Applications",
+  "subject": "Trading Blotter",
+  "detail": "Single-tenant OIDC app, tier1, 42 assigned users. Uses tenant-specific claims or IDs, so tokens will change.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 42,
+  "refs": [
+   "9d518648-494b-f6bd-cdc6-fe24f317a244"
+  ]
+ },
+ {
+  "id": "APP-001",
+  "severity": "critical",
+  "category": "Applications",
+  "subject": "Treasury Management System",
+  "detail": "Single-tenant OIDC app, tier1, 70 assigned users. Uses tenant-specific claims or IDs, so tokens will change.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 70,
+  "refs": [
+   "4bd3d615-25f8-8a60-6af0-6457c9ec31c5"
+  ]
+ },
+ {
+  "id": "APP-003",
+  "severity": "critical",
+  "category": "Applications",
+  "subject": "Cards Processing API",
+  "detail": "Holds high-privilege application permissions: Directory.ReadWrite.All, User.Read.All. Admin consent does not transfer between tenants.",
+  "remediation": "Re-justify each permission, scope down, and re-consent in the target with a documented approval.",
+  "count": 1,
+  "refs": []
+ },
+ {
+  "id": "CA-001",
+  "severity": "critical",
+  "category": "Conditional Access",
+  "subject": "Phishing-resistant admins",
+  "detail": "Source enforces this control (CA005 Admins phishing-resistant MFA); target is 'none'. Migrated users and tier-1 apps would silently lose a regulatory-relevant control.",
+  "remediation": "Deploy an equivalent policy to the target in report-only, review sign-in logs for a week, then enforce before the first wave.",
+  "count": 1,
+  "refs": []
+ },
+ {
+  "id": "DOM-001",
+  "severity": "critical",
+  "category": "Domains",
+  "subject": "contoso-legacy.example",
+  "detail": "Domain is verified in BOTH tenants. A domain can live in only one tenant, so mail flow and UPN suffix moves are blocked until it is released from one side.",
+  "remediation": "Remove from the tenant that should not own it (after clearing references), then verify in the other. Schedule DNS TXT changes inside a freeze-safe window.",
+  "count": 1,
+  "refs": []
+ },
+ {
+  "id": "USR-003",
+  "severity": "critical",
+  "category": "Messaging",
+  "subject": "proxyAddress conflict",
+  "detail": "6 SMTP addresses exist in both tenants. Exchange Online rejects the second owner, so those users cannot be provisioned and mail to the alias goes to the wrong mailbox.",
+  "remediation": "Choose a single owner per alias, remove it from the other object, and convert to a shared mailbox or distribution group where appropriate.",
+  "count": 6,
+  "refs": [
+   "helpdesk@shared-legacy.example",
+   "ir@shared-legacy.example",
+   "legal@shared-legacy.example",
+   "payroll@shared-legacy.example",
+   "swift-alerts@shared-legacy.example",
+   "treasury-ops@shared-legacy.example"
+  ]
+ },
+ {
+  "id": "APP-002",
+  "severity": "high",
+  "category": "Applications",
+  "subject": "SWIFT Alliance Access SSO",
+  "detail": "SAML signing certificate expires in 12 days, inside the migration window.",
+  "remediation": "Roll the certificate once, in the target tenant, instead of twice.",
+  "count": 1,
+  "refs": []
+ },
+ {
+  "id": "APP-003",
+  "severity": "high",
+  "category": "Applications",
+  "subject": "Customer Onboarding Bot",
+  "detail": "Holds high-privilege application permissions: Mail.Send, User.Read.All. Admin consent does not transfer between tenants.",
+  "remediation": "Re-justify each permission, scope down, and re-consent in the target with a documented approval.",
+  "count": 1,
+  "refs": []
+ },
+ {
+  "id": "MFA-001",
+  "severity": "high",
+  "category": "Authentication",
+  "subject": "Users with no MFA registered",
+  "detail": "113 users (18%) have no strong authentication method. Inbound MFA trust only helps users who already registered; the rest hit a registration wall on day one.",
+  "remediation": "Run a Temporary Access Pass campaign two weeks before each wave. Gate each wave on at least 98% registration.",
+  "count": 113,
+  "refs": []
+ },
+ {
+  "id": "CA-001",
+  "severity": "high",
+  "category": "Conditional Access",
+  "subject": "Block guests from tier1",
+  "detail": "Source enforces this control (CA009 Block guests from tier1); target is 'none'. Migrated users and tier-1 apps would silently lose a regulatory-relevant control.",
+  "remediation": "Deploy an equivalent policy to the target in report-only, review sign-in logs for a week, then enforce before the first wave.",
+  "count": 1,
+  "refs": []
+ },
+ {
+  "id": "CA-001",
+  "severity": "high",
+  "category": "Conditional Access",
+  "subject": "Location restriction",
+  "detail": "Source enforces this control (CA006 Trusted locations only for Treasury); target is 'none'. Migrated users and tier-1 apps would silently lose a regulatory-relevant control.",
+  "remediation": "Deploy an equivalent policy to the target in report-only, review sign-in logs for a week, then enforce before the first wave.",
+  "count": 1,
+  "refs": []
+ },
+ {
+  "id": "CA-001",
+  "severity": "high",
+  "category": "Conditional Access",
+  "subject": "Sign-in frequency",
+  "detail": "Source enforces this control (CA007 Sign-in frequency 4h for tier1); target is 'report-only'. Migrated users and tier-1 apps would silently lose a regulatory-relevant control.",
+  "remediation": "Deploy an equivalent policy to the target in report-only, review sign-in logs for a week, then enforce before the first wave.",
+  "count": 1,
+  "refs": []
+ },
+ {
+  "id": "DEV-001",
+  "severity": "high",
+  "category": "Devices",
+  "subject": "Entra-joined devices",
+  "detail": "221 Entra-joined devices cannot be moved between tenants and must be re-provisioned (Autopilot reset); 315 hybrid-joined devices need their connection point or Cloud Sync re-pointed; 391 are Intune-enrolled and must be re-enrolled in the target.",
+  "remediation": "Schedule device re-provisioning with the user's wave, not before. Pre-stage Autopilot hardware hashes into the target.",
+  "count": 221,
+  "refs": []
+ },
+ {
+  "id": "DOM-002",
+  "severity": "high",
+  "category": "Domains",
+  "subject": "contosolife.example",
+  "detail": "Domain is federated (AD FS or third-party IdP). It must be converted to managed (PHS or PTA) before it can move, which changes every user's sign-in path.",
+  "remediation": "Pilot staged rollout to managed authentication, then convert the domain. Keep the federation trust documented for rollback.",
+  "count": 1,
+  "refs": []
+ },
+ {
+  "id": "USR-001",
+  "severity": "high",
+  "category": "Identity",
+  "subject": "Same person in both tenants",
+  "detail": "14 people hold an account in each tenant (matched on employeeId). Provisioning a second identity creates split mailboxes, duplicate licenses and broken audit trails.",
+  "remediation": "Decide the surviving account per person, merge group and app access to it, soft-match before sync, retire the other after the wave.",
+  "count": 14,
+  "refs": [
+   "jhall@contosobank.example",
+   "ifeoma.parker@contosobank.example",
+   "fokafor@contosobank.example",
+   "jking@contosobank.example",
+   "femi.roberts@contosobank.example",
+   "rbalogun@contosobank.example",
+   "john.stewart@contosolife.example",
+   "rphillips@contosobank.example",
+   "jwilson@contosobank.example",
+   "linda.brown@contosolife.example"
+  ]
+ },
+ {
+  "id": "USR-002",
+  "severity": "high",
+  "category": "Identity",
+  "subject": "mailNickname collision",
+  "detail": "236 different people share a mailNickname across tenants. Cross-tenant sync and Exchange provisioning will fail or silently rename one of them.",
+  "remediation": "Pre-assign a deterministic suffix, for example <nick>.cb, and record it in the mapping table.",
+  "count": 236,
+  "refs": [
+   "ggreen",
+   "ifeoma.balogun",
+   "ivan.bello",
+   "iedwards",
+   "radams",
+   "pokafor",
+   "emeka.mitchell",
+   "iparker",
+   "lwright",
+   "syoung"
+  ]
+ },
+ {
+  "id": "USR-005",
+  "severity": "high",
+  "category": "Identity",
+  "subject": "On-premises synced users",
+  "detail": "504 of 640 source users are mastered in on-premises AD. Cross-tenant sync can provision them, but source of authority stays in the old forest until it is consolidated or re-pointed.",
+  "remediation": "Choose: (A) keep source AD and run Cloud Sync into the target tenant, or (B) migrate the forest with ADMT. Decide before wave 1 because it sets the hard-match strategy.",
+  "count": 504,
+  "refs": []
+ },
+ {
+  "id": "LIC-001",
+  "severity": "high",
+  "category": "Licensing",
+  "subject": "VISIO_PLAN2",
+  "detail": "60 users need VISIO_PLAN2, which the target tenant does not own.",
+  "remediation": "Add the SKU to the acquirer's agreement or map to an equivalent before wave 1.",
+  "count": 60,
+  "refs": []
+ },
+ {
+  "id": "LIC-002",
+  "severity": "high",
+  "category": "Licensing",
+  "subject": "SPE_E3",
+  "detail": "Need 420, free 225: short by 195 seats at full migration. Seats are exhausted during wave 4.",
+  "remediation": "Purchase or true-up before the wave that crosses the limit. See wave plan for the exact crossing point.",
+  "count": 195,
+  "refs": []
+ },
+ {
+  "id": "LIC-002",
+  "severity": "high",
+  "category": "Licensing",
+  "subject": "SPE_E5",
+  "detail": "Need 220, free 95: short by 125 seats at full migration. Seats are exhausted during wave 5.",
+  "remediation": "Purchase or true-up before the wave that crosses the limit. See wave plan for the exact crossing point.",
+  "count": 125,
+  "refs": []
+ },
+ {
+  "id": "PRIV-001",
+  "severity": "high",
+  "category": "Privilege",
+  "subject": "Excess Global Administrators",
+  "detail": "7 Global Administrators in the source. Merging unchanged would import standing privilege into the acquirer's tenant.",
+  "remediation": "Do not sync privileged roles. Rebuild admin access in the target with PIM, break-glass accounts and phishing-resistant MFA.",
+  "count": 7,
+  "refs": []
+ },
+ {
+  "id": "APP-001",
+  "severity": "medium",
+  "category": "Applications",
+  "subject": "Bloomberg SSO",
+  "detail": "Single-tenant SAML app, tier2, 118 assigned users.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 118,
+  "refs": [
+   "481d8790-6e60-9312-15f3-b24fd8c5d43c"
+  ]
+ },
+ {
+  "id": "APP-001",
+  "severity": "medium",
+  "category": "Applications",
+  "subject": "Customer Onboarding Bot",
+  "detail": "Single-tenant API app, tier2, 141 assigned users.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 141,
+  "refs": [
+   "e1796d00-196b-a588-2d53-6b911dc6d605"
+  ]
+ },
+ {
+  "id": "APP-001",
+  "severity": "medium",
+  "category": "Applications",
+  "subject": "DocuSign",
+  "detail": "Single-tenant SAML app, tier3, 105 assigned users.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 105,
+  "refs": [
+   "d85e00d2-1158-af8d-c751-30d94323a1c7"
+  ]
+ },
+ {
+  "id": "APP-001",
+  "severity": "medium",
+  "category": "Applications",
+  "subject": "Expense Tool",
+  "detail": "Single-tenant OIDC app, tier3, 597 assigned users.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 597,
+  "refs": [
+   "f1253ef9-ee77-cf7f-8d60-b53a12f72bf5"
+  ]
+ },
+ {
+  "id": "APP-001",
+  "severity": "medium",
+  "category": "Applications",
+  "subject": "Intranet Portal",
+  "detail": "Single-tenant OIDC app, tier3, 604 assigned users.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 604,
+  "refs": [
+   "4c8b0cd8-a002-e67c-e960-badd4280e929"
+  ]
+ },
+ {
+  "id": "APP-001",
+  "severity": "medium",
+  "category": "Applications",
+  "subject": "Legacy HR Self Service",
+  "detail": "Single-tenant OIDC app, tier3, 23 assigned users.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 23,
+  "refs": [
+   "af6e93d9-0ef9-6502-fadf-466f28c76897"
+  ]
+ },
+ {
+  "id": "APP-001",
+  "severity": "medium",
+  "category": "Applications",
+  "subject": "Salesforce",
+  "detail": "Single-tenant SAML app, tier2, 228 assigned users. The target already hosts an app of the same name, so decide whether to consolidate.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 228,
+  "refs": [
+   "da3a7f44-2c0b-ff20-3806-a0a7f6298cd3"
+  ]
+ },
+ {
+  "id": "APP-001",
+  "severity": "medium",
+  "category": "Applications",
+  "subject": "ServiceNow",
+  "detail": "Single-tenant SAML app, tier2, 591 assigned users. The target already hosts an app of the same name, so decide whether to consolidate.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 591,
+  "refs": [
+   "267b882b-3428-bebc-34ed-25bc17745e74"
+  ]
+ },
+ {
+  "id": "APP-001",
+  "severity": "medium",
+  "category": "Applications",
+  "subject": "Splunk",
+  "detail": "Single-tenant SAML app, tier2, 91 assigned users.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 91,
+  "refs": [
+   "4b15847c-a9b9-10df-933d-7c42b3731935"
+  ]
+ },
+ {
+  "id": "APP-001",
+  "severity": "medium",
+  "category": "Applications",
+  "subject": "Workday",
+  "detail": "Single-tenant SAML app, tier2, 53 assigned users. The target already hosts an app of the same name, so decide whether to consolidate.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 53,
+  "refs": [
+   "163dd850-5196-4e1c-6037-5c8ec99a6368"
+  ]
+ },
+ {
+  "id": "APP-001",
+  "severity": "medium",
+  "category": "Applications",
+  "subject": "Zoom",
+  "detail": "Single-tenant SAML app, tier3, 590 assigned users. The target already hosts an app of the same name, so decide whether to consolidate.",
+  "remediation": "Re-register in the target, rotate secrets, update the relying party, and test with a pilot group before its wave.",
+  "count": 590,
+  "refs": [
+   "e3ccd71d-5a85-2120-1a65-abf5ff90da8f"
+  ]
+ },
+ {
+  "id": "APP-002",
+  "severity": "medium",
+  "category": "Applications",
+  "subject": "Bloomberg SSO",
+  "detail": "SAML signing certificate expires in 80 days, inside the migration window.",
+  "remediation": "Roll the certificate once, in the target tenant, instead of twice.",
+  "count": 1,
+  "refs": []
+ },
+ {
+  "id": "APP-002",
+  "severity": "medium",
+  "category": "Applications",
+  "subject": "Core Banking Gateway",
+  "detail": "SAML signing certificate expires in 47 days, inside the migration window.",
+  "remediation": "Roll the certificate once, in the target tenant, instead of twice.",
+  "count": 1,
+  "refs": []
+ },
+ {
+  "id": "APP-002",
+  "severity": "medium",
+  "category": "Applications",
+  "subject": "DocuSign",
+  "detail": "SAML signing certificate expires in 80 days, inside the migration window.",
+  "remediation": "Roll the certificate once, in the target tenant, instead of twice.",
+  "count": 1,
+  "refs": []
+ },
+ {
+  "id": "APP-002",
+  "severity": "medium",
+  "category": "Applications",
+  "subject": "ServiceNow",
+  "detail": "SAML signing certificate expires in 47 days, inside the migration window.",
+  "remediation": "Roll the certificate once, in the target tenant, instead of twice.",
+  "count": 1,
+  "refs": []
+ },
+ {
+  "id": "APP-002",
+  "severity": "medium",
+  "category": "Applications",
+  "subject": "Splunk",
+  "detail": "SAML signing certificate expires in 47 days, inside the migration window.",
+  "remediation": "Roll the certificate once, in the target tenant, instead of twice.",
+  "count": 1,
+  "refs": []
+ },
+ {
+  "id": "USR-004",
+  "severity": "medium",
+  "category": "Identity",
+  "subject": "Ambiguous display names",
+  "detail": "250 users share a displayName with someone in the target. Not a technical blocker, but the GAL becomes ambiguous and helpdesk match-by-name errors will appear.",
+  "remediation": "Append department or location to displayName in the unified GAL.",
+  "count": 250,
+  "refs": []
+ },
+ {
+  "id": "USR-006",
+  "severity": "medium",
+  "category": "Identity",
+  "subject": "Source guests",
+  "detail": "12 guest accounts exist in the source tenant. They do not move with cross-tenant sync and must be re-invited.",
+  "remediation": "Export, de-duplicate against target guests, re-invite with B2B direct connect where possible.",
+  "count": 12,
+  "refs": []
+ }
+]

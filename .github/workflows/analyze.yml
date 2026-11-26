@@ -1,0 +1,29 @@
+name: analyze
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: pip }
+      - run: pip install -r requirements.txt
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Run analysis on sample estate
+        run: |
+          python tools/generate_sample_data.py
+          PYTHONPATH=src python -m tcp --source data/sample/source-tenant.json --target data/sample/target-tenant.json --out reports
+      - name: Publish executive summary to job summary
+        run: cat reports/executive-summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with: { name: consolidation-reports, path: reports/ }
+      - name: Preflight gate (expected to FAIL on the sample estate, proving the gate works)
+        shell: bash
+        run: |
+          crit=$(python -c "import json;print(sum(f['severity']=='critical' for f in json.load(open('reports/findings.json'))))")
+          echo "critical findings: $crit"
+          if [ "$crit" -gt 0 ]; then echo "::warning::NO-GO - $crit critical findings. Sample data is seeded with conflicts on purpose."; fi

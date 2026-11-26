@@ -1,0 +1,17 @@
+{
+  "startDate": "2027-01-12",
+  "cutoverWeekday": 1,
+  "maxWaveSize": 110,
+  "pilotSize": 25,
+  "pilotDepartment": "IT",
+  "regulatedDepartments": ["Treasury", "Trading", "Compliance", "Risk"],
+  "freezeWindows": [
+    {"name": "Year-end close", "start": "2027-01-25", "end": "2027-02-05"},
+    {"name": "Quarter-end", "start": "2027-03-25", "end": "2027-04-06"},
+    {"name": "Regulatory filing", "start": "2027-04-26", "end": "2027-05-07"}
+  ],
+  "riskWeights": {
+    "privileged": 25, "onPremSynced": 10, "tier1App": 12, "tier2App": 4,
+    "entraJoinedDevice": 8, "noMfa": 12, "regulatedDept": 15
+  }
+}
